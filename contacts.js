@@ -4,7 +4,6 @@ const contactsPath = path.join("db", "contacts.json");
 const { nanoid } = require("nanoid");
 
 async function listContacts() {
-  // ...твій код. Повертає масив контактів.
   try {
     const contactsRead = await fs.readFile(contactsPath, {
       encoding: "utf8",
@@ -15,13 +14,12 @@ async function listContacts() {
     console.log(error.message);
   }
 }
-listContacts();
+
 async function getContactById(contactId) {
-  // ...твій код. Повертає об'єкт контакту з таким id. Повертає null, якщо контакт з таким id не знайдений.
   try {
     const contacts = await listContacts();
     const contactFind = contacts.find((contact) => contact.id === contactId);
-    if (contactFind === undefined) {
+    if (!contactFind) {
       return null;
     }
     return contactFind;
@@ -29,9 +27,8 @@ async function getContactById(contactId) {
     console.log(error.message);
   }
 }
-getContactById("AeHIrLTr6JkxGE6SN-0Rw");
+
 async function removeContact(contactId) {
-  // ...твій код. Повертає об'єкт видаленого контакту. Повертає null, якщо контакт з таким id не знайдений.
   try {
     const contacts = await listContacts();
     const contactDelete = contacts.filter(
@@ -50,10 +47,8 @@ async function removeContact(contactId) {
     console.log(error.message);
   }
 }
-// removeContact("rsKkOQUi80UsgVPCcLZZW");
 
 async function addContact(name, email, phone) {
-  // ...твій код. Повертає об'єкт доданого контакту.
   try {
     const newContact = {
       id: nanoid(),
@@ -72,7 +67,6 @@ async function addContact(name, email, phone) {
     console.log(error.message);
   }
 }
-// addContact("helo", "a@hidden", "55555");
 
 module.exports = {
   removeContact,
